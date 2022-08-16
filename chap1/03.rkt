@@ -1,20 +1,12 @@
 #lang sicp
 
-;引数3つ→返り値2つ がわからなかったので, 最小値を返してその分引いた
-;
+;3数の平方和を取って、最小値の平方和を引く。
+
 (define (square x) (* x x))
-(define (sumsq x y) (+ (square x) (square y)))
-#|
-(define (bigger x y)
-        (cond ((< x y) y)
-              (else x)))
-        ;(if (< x y) y) x))
-(define (biggest x y z)
-        (bigger (bigger x y) z))
-|#    
+
 (define (smaller x y)
-        (cond ((< x y) x)
-              (else y)))
+        (if (< x y) x y))
+
 (define (smallest x y z)
         (smaller (smaller x y) z))
 
@@ -22,8 +14,18 @@
         (+ (square a) (square b) (square c)
            (- (square (smallest a b c)))))
 
-(solve 3 10 100)
-;10100
-(solve 1 2 3)
-(solve -1 -1 -1)
-(solve 20 -20 0)
+(solve 3 10 100) ;10100
+(solve 1 2 3) ;13
+(solve -1 -1 -1) ;2
+(solve 20 -20 0) ;400
+(solve 0 0 0) ;0
+
+;引数3つ→大きいもの2つ返すいい感じの書き方ないっすか？
+
+#| やろうとした残骸
+(define (bigger x y)
+        (if (< x y) y) x))
+
+(define (biggest x y z)
+        (bigger (bigger x y) z))
+|#
